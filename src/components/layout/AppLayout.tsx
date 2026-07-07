@@ -1,8 +1,21 @@
-import { Outlet } from 'react-router-dom'
+import { useLayoutEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
 export function AppLayout() {
+  const location = useLocation()
+
+  useLayoutEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration
+    }
+  }, [location.pathname])
+
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-clip">
       <div className="pointer-events-none absolute left-[-10rem] top-[-8rem] h-64 w-64 rounded-full bg-indigo-100/90 blur-3xl" />
