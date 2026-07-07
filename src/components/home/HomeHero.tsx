@@ -72,7 +72,7 @@ export function HomeHero() {
               <p className="text-xs text-slate-500">AI akce a události</p>
             </div>
             <div>
-              <p className="text-2xl font-extrabold text-indigo-700">{engagedNamesCount}</p>
+              <p className="text-2xl font-extrabold text-indigo-700">{engagedNamesCount}+</p>
               <p className="text-xs text-slate-500">Zapojených žáků</p>
             </div>
             <div>
