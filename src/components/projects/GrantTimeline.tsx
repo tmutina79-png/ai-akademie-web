@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { grantProjects } from '../../data/grantProjects'
+import { assetPath } from '../../utils/assetPath'
 
 export function GrantTimeline() {
   return (
@@ -53,11 +54,11 @@ export function GrantTimeline() {
             <h3 className="teams-title text-base">Partneři</h3>
             <div className="mt-3 space-y-2">
               <div className="partner-logo-frame flex h-14 items-center justify-center rounded-md border border-slate-200 bg-white">
-                <img src="/ostrava-logo.png" alt="Ostrava" className="partner-logo-ostrava" />
+                <img src={assetPath('ostrava-logo.png')} alt="Ostrava" className="partner-logo-ostrava" />
               </div>
               <div className="partner-logo-frame flex h-14 items-center justify-center rounded-md border border-slate-200 bg-white">
                 <img
-                  src="/msk-logo.png"
+                  src={assetPath('msk-logo.png')}
                   alt="Moravskoslezský kraj"
                   className="partner-logo-msk"
                 />

@@ -1,8 +1,10 @@
+import { assetPath } from '../../utils/assetPath'
+
 export function BrandMark() {
   return (
     <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
       <img
-        src="/mgo-logo.jpeg"
+        src={assetPath('mgo-logo.jpeg')}
         alt="Logo Matičního gymnázia Ostrava"
         className="h-8 w-8 rounded object-cover md:h-9 md:w-9"
       />

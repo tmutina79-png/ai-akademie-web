@@ -5,6 +5,7 @@ import { HomeEventsCalendar } from '../components/home/HomeEventsCalendar'
 import { HomeHero } from '../components/home/HomeHero'
 import { HomePhotoGallery } from '../components/home/HomePhotoGallery'
 import { HomeProjectsPreview } from '../components/home/HomeProjectsPreview'
+import { assetPath } from '../utils/assetPath'
 
 export function HomePage() {
   const [showFundingModal, setShowFundingModal] = useState(true)
@@ -60,10 +61,10 @@ export function HomePage() {
 
               <div className="grid content-center gap-4">
                 <div className="partner-logo-frame flex h-28 items-center justify-center rounded-3xl border border-slate-200 bg-white shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
-                  <img src="/ostrava-logo.png" alt="Ostrava" className="partner-logo-ostrava" />
+                  <img src={assetPath('ostrava-logo.png')} alt="Ostrava" className="partner-logo-ostrava" />
                 </div>
                 <div className="partner-logo-frame flex h-28 items-center justify-center rounded-3xl border border-slate-200 bg-white shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
-                  <img src="/msk-logo.png" alt="Moravskoslezský kraj" className="partner-logo-msk" />
+                  <img src={assetPath('msk-logo.png')} alt="Moravskoslezský kraj" className="partner-logo-msk" />
                 </div>
               </div>
             </div>

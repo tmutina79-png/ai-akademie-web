@@ -1,4 +1,5 @@
 import { Globe, MessageSquareQuote, type LucideIcon } from 'lucide-react'
+import { assetPath } from '../utils/assetPath'
 
 export type ProjectItem = {
   id: string
@@ -21,7 +22,7 @@ export const projects: ProjectItem[] = [
     status: 'Připravuje se',
     owner: 'Žáci a učitelé',
     icon: Globe,
-    image: '/mgo-logo.jpeg',
+    image: assetPath('mgo-logo.jpeg'),
   },
   {
     id: 'web-ai-akademie',

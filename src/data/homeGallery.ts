@@ -1,3 +1,5 @@
+import { assetPath } from '../utils/assetPath'
+
 export type HomeGalleryItem = {
   id: string
   title: string
@@ -16,7 +18,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Společná akce žáků ZŠ Bohumínská Ostrava, ZŠ ČSA Bohumín a Matičního gymnázia Ostrava zaměřená na programování, AI a robotiku.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5388.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5388.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -26,7 +28,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Společná akce žáků ZŠ Bohumínská Ostrava, ZŠ ČSA Bohumín a Matičního gymnázia Ostrava zaměřená na programování, AI a robotiku.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5390.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5390.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -36,7 +38,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Žáci si vyzkoušeli praktické úlohy v programování a práci s moderní technikou pod vedením lektorů a studentů MGO.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5391.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5391.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -46,7 +48,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Žáci pracovali v týmech, řešili úkoly a zkoušeli praktické scénáře využití AI nástrojů.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5392.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5392.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -56,7 +58,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Program zahrnoval práci s robotikou, kódováním i sdílením postupů mezi skupinami.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5393.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5393.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -66,7 +68,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Účastníci rozvíjeli digitální dovednosti a představili vlastní nápady pro další práci.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5394.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5394.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -76,7 +78,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Účastníci společně tvořili, programovali a rozvíjeli vlastní nápady v přátelské spolupráci mezi základní školou a gymnáziem.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5408.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5408.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -86,7 +88,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Spolupráce mezi školami podpořila kreativitu, komunikaci i praktické řešení úloh.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5409.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5409.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -96,7 +98,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Průběh akce ukázal, jak lze AI a robotiku smysluplně zapojit do výuky i projektů.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5410.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5410.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
   {
@@ -106,7 +108,7 @@ export const homeGalleryPhotos: HomeGalleryItem[] = [
       'Závěrečné společné foto týmu a žáků po dopoledni plném robotiky, AI nástrojů a sdílení zkušeností.',
     date: '17. června 2026',
     location: 'ZŠ Bohumínská Ostrava',
-    image: '/events/zazitkove-odpoledne/IMG_5411.JPG',
+    image: assetPath('events/zazitkove-odpoledne/IMG_5411.JPG'),
     eventTag: 'Zážitkové odpoledne s programováním a robotikou',
   },
 ]
