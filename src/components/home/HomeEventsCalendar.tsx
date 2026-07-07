@@ -1,5 +1,5 @@
 import { CalendarDays, ChevronLeft, ChevronRight, Clock3, MapPin, Sparkles } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { homeEvents, type HomeEventCategory, type HomeEventItem } from '../../data/homeEvents'
 
@@ -58,6 +58,47 @@ function formatFullDate(date: string) {
   }).format(new Date(date))
 }
 
+function getDateCuriosity(date: string) {
+  const current = new Date(date)
+  const month = current.getMonth() + 1
+  const day = current.getDate()
+  const dayOfYear = Math.floor((current.getTime() - new Date(current.getFullYear(), 0, 0).getTime()) / 86400000)
+  const daysInYear = new Date(current.getFullYear(), 1, 29).getMonth() === 1 ? 366 : 365
+  const daysToEndOfYear = daysInYear - dayOfYear
+
+  const curiosities: Record<string, string> = {
+    '1-1': 'Nový rok je ideální čas dát si mini výzvu: zkus každý den 10 minut práce s AI nástroji.',
+    '2-11': '11. února je Mezinárodní den žen a dívek ve vědě. Skvělá připomínka, že technologie jsou pro všechny.',
+    '3-14': '14. března je Pi Day. Zkus si nechat od AI vysvětlit, proč je číslo pi tak důležité v technice i grafice.',
+    '4-22': '22. dubna je Den Země. AI dnes pomáhá třeba s předpovědí počasí nebo úsporami energií.',
+    '5-17': '17. května je Světový den telekomunikací. Bez sítí bychom neměli cloud ani moderní AI služby.',
+    '6-5': '5. června je Den životního prostředí. Data a AI se používají i k ochraně přírody.',
+    '7-1': 'Červenec je skvělý čas pro vlastní projekt. Třeba jednoduchý chatbot nebo AI asistenta pro školní téma.',
+    '8-12': '12. srpna je Mezinárodní den mládeže. Technologie, které tvoříš dnes, mohou měnit svět zítra.',
+    '9-1': 'Září je start školního roku. Ideální moment nastavit si cíl: jeden nový AI skill každý měsíc.',
+    '10-1': 'Říjen bývá měsící programování. Zkus si naplánovat malý kódovací projekt s pomocí AI.',
+    '11-10': '10. listopadu je Světový den vědy pro mír a rozvoj. AI je silný nástroj, když se používá odpovědně.',
+    '12-10': '10. prosince je Den lidských práv. U AI je důležité myslet na etiku, férovost a bezpečí dat.',
+  }
+
+  if (curiosities[`${month}-${day}`]) {
+    return curiosities[`${month}-${day}`]
+  }
+
+  const dateBasedTips = [
+    `Dnešek je ${dayOfYear}. den roku a do konce roku zbývá ${daysToEndOfYear} dní. Zkus do té doby dokončit jeden vlastní AI mini-projekt.`,
+    `Datum ${day}.${month}. je skvělý milník: vyhraď si dnes 20 minut a nech AI vytvořit krátký kvíz z látky, kterou právě probíráte.`,
+    `Dnešní výzva k datu ${day}.${month}.: vezmi jednu školní otázku a porovnej odpověď AI s učebnicí. Najdeš rozdíly?`,
+    `Tip pro ${day}.${month}.: zkus dnes metodu 3 promptů - vysvětli, shrň, otestuj. Je to rychlý způsob, jak se učit chytřeji.`,
+    `Zajímavost dne ${day}.${month}.: i malá denní práce s AI (10-15 minut) dělá za měsíc velký rozdíl v dovednostech.`,
+    `Pro datum ${day}.${month}.: nech si od AI navrhnout studijní plán na 1 týden přesně pro předmět, který ti dělá největší potíže.`,
+    `Dnešní datum ${day}.${month}. připomíná: nejlepší výsledky s AI máš, když jí dáváš konkrétní zadání a pak výstup ověřuješ.`,
+  ]
+
+  const tipIndex = (day + month + current.getFullYear()) % dateBasedTips.length
+  return dateBasedTips[tipIndex]
+}
+
 function getUpcomingEvents(events: HomeEventItem[], baseDate: Date) {
   const start = new Date(baseDate)
   start.setHours(0, 0, 0, 0)
@@ -73,6 +114,8 @@ export function HomeEventsCalendar() {
   const [viewedMonth, setViewedMonth] = useState(() => startOfMonth(today))
   const [selectedDate, setSelectedDate] = useState(() => toIsoDateLocal(today))
   const [selectedEventByDate, setSelectedEventByDate] = useState<Record<string, string>>({})
+  const upcomingScrollRef = useRef<HTMLDivElement | null>(null)
+  const [upcomingScrollbar, setUpcomingScrollbar] = useState({ visible: false, top: 0, height: 0 })
   const monthLabel = new Intl.DateTimeFormat('cs-CZ', { month: 'long', year: 'numeric' }).format(viewedMonth)
 
   const daysInMonth = endOfMonth(viewedMonth).getDate()
@@ -95,6 +138,45 @@ export function HomeEventsCalendar() {
   const selectedEventId = selectedEventByDate[selectedDate]
   const activeEvent = selectedEvents.find((event) => event.id === selectedEventId) ?? selectedEvents[0] ?? null
   const upcomingEvents = useMemo(() => getUpcomingEvents(homeEvents, today), [today])
+
+  const updateUpcomingScrollbar = useCallback(() => {
+    const element = upcomingScrollRef.current
+    if (!element) return
+
+    const { scrollTop, scrollHeight, clientHeight } = element
+    const canScroll = scrollHeight > clientHeight + 1
+
+    if (!canScroll) {
+      setUpcomingScrollbar({ visible: false, top: 0, height: 0 })
+      return
+    }
+
+    const thumbHeight = Math.max((clientHeight / scrollHeight) * clientHeight, 30)
+    const maxThumbTop = clientHeight - thumbHeight
+    const maxScrollTop = scrollHeight - clientHeight
+    const thumbTop = maxScrollTop > 0 ? (scrollTop / maxScrollTop) * maxThumbTop : 0
+
+    setUpcomingScrollbar({ visible: true, top: thumbTop, height: thumbHeight })
+  }, [])
+
+  useEffect(() => {
+    updateUpcomingScrollbar()
+
+    const element = upcomingScrollRef.current
+    if (!element) return
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateUpcomingScrollbar()
+    })
+
+    resizeObserver.observe(element)
+    window.addEventListener('resize', updateUpcomingScrollbar)
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateUpcomingScrollbar)
+    }
+  }, [updateUpcomingScrollbar, upcomingEvents.length])
 
   const changeMonth = (offset: number) => {
     const nextMonth = addMonths(viewedMonth, offset)
@@ -286,53 +368,73 @@ export function HomeEventsCalendar() {
             ) : (
               <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-5 py-10 text-center">
                 <Sparkles className="mx-auto h-8 w-8 text-slate-400" />
-                <p className="mt-3 text-sm font-semibold text-slate-700">V tento den není zapsaná akce</p>
-                <p className="mt-1 text-sm text-slate-500">Klikněte na jiný den s modrým bodem.</p>
+                <p className="mt-3 text-sm font-semibold text-slate-700">Pro tento den není naplánovaná žádná událost AI akademie MGO.</p>
+                <p className="mt-2 text-sm text-slate-500">{getDateCuriosity(selectedDate)}</p>
               </div>
             )}
           </div>
         </section>
 
-        <aside className="h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
+        <aside className="upcoming-events-card group/upcoming h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
           <div className="border-b border-slate-200 bg-slate-50 px-5 py-4">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Nadcházející</p>
             <h3 className="mt-1 text-lg font-bold text-slate-900">Nadcházející události</h3>
           </div>
 
-          <div className="max-h-[330px] space-y-2 overflow-y-auto p-4">
-            {upcomingEvents.map((event) => (
-              <button
-                key={event.id}
-                type="button"
-                onClick={() => {
-                  const eventDate = new Date(event.date)
-                  setViewedMonth(startOfMonth(eventDate))
-                  setSelectedDate(event.date)
-                  setSelectedEventByDate((previous) => ({ ...previous, [event.date]: event.id }))
-                }}
-                className={[
-                  'w-full rounded-2xl border bg-white p-3 text-left transition',
-                  selectedDate === event.date && selectedEventByDate[event.date] === event.id
-                    ? 'border-indigo-300 bg-indigo-50/70 ring-2 ring-indigo-200'
-                    : 'border-slate-200 hover:border-indigo-200 hover:bg-indigo-50/50',
-                ].join(' ')}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <span className={[
-                    'inline-flex rounded-full border px-2.5 py-1 text-[11px] font-semibold',
-                    categoryStyles[event.category],
-                  ].join(' ')}>
-                    {event.category}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500">{formatDayLabel(new Date(event.date))}</span>
+          <div className="relative">
+            <div
+              ref={upcomingScrollRef}
+              onScroll={updateUpcomingScrollbar}
+              className="upcoming-events-scroll max-h-[330px] space-y-2 overflow-y-auto p-4 pr-5"
+            >
+              {upcomingEvents.map((event) => (
+                <button
+                  key={event.id}
+                  type="button"
+                  onClick={() => {
+                    const eventDate = new Date(event.date)
+                    setViewedMonth(startOfMonth(eventDate))
+                    setSelectedDate(event.date)
+                    setSelectedEventByDate((previous) => ({ ...previous, [event.date]: event.id }))
+                  }}
+                  className={[
+                    'w-full rounded-2xl border bg-white p-3 text-left transition',
+                    selectedDate === event.date && selectedEventByDate[event.date] === event.id
+                      ? 'border-indigo-300 bg-indigo-50/70 ring-2 ring-indigo-200'
+                      : 'border-slate-200 hover:border-indigo-200 hover:bg-indigo-50/50',
+                  ].join(' ')}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className={[
+                      'inline-flex rounded-full border px-2.5 py-1 text-[11px] font-semibold',
+                      categoryStyles[event.category],
+                    ].join(' ')}>
+                      {event.category}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500">{formatDayLabel(new Date(event.date))}</span>
+                  </div>
+                  <p className="mt-2 line-clamp-2 text-sm font-bold leading-snug text-slate-900">{event.title}</p>
+                  <p className="mt-1 text-xs font-medium text-slate-600">{event.startTime} • {event.location}</p>
+                </button>
+              ))}
+              {!upcomingEvents.length ? (
+                <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
+                  Aktuálně nejsou evidované žádné nadcházející události.
                 </div>
-                <p className="mt-2 line-clamp-2 text-sm font-bold leading-snug text-slate-900">{event.title}</p>
-                <p className="mt-1 text-xs font-medium text-slate-600">{event.startTime} • {event.location}</p>
-              </button>
-            ))}
-            {!upcomingEvents.length ? (
-              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
-                Aktuálně nejsou evidované žádné nadcházející události.
+              ) : null}
+            </div>
+
+            {upcomingScrollbar.visible ? (
+              <div className="pointer-events-none absolute bottom-4 right-1 top-4 w-1.5 opacity-0 transition-opacity duration-150 group-hover/upcoming:opacity-100 group-focus-within/upcoming:opacity-100">
+                <div className="h-full rounded-full bg-slate-200/80">
+                  <div
+                    className="rounded-full bg-slate-400 transition-colors duration-150 group-hover/upcoming:bg-slate-500 group-focus-within/upcoming:bg-slate-500"
+                    style={{
+                      height: `${upcomingScrollbar.height}px`,
+                      transform: `translateY(${upcomingScrollbar.top}px)`,
+                    }}
+                  />
+                </div>
               </div>
             ) : null}
           </div>

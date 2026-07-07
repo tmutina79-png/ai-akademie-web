@@ -213,31 +213,31 @@ export function GrantProjectDetailPage() {
               ))}
             </ul>
           </section>
+
+          <section className="teams-panel">
+            <div className="teams-panel-head">
+              <h3 className="teams-title text-xl">Přesný harmonogram akcí v kalendáři</h3>
+              <span className="teams-pill">{sortedCalendar.length} zápisů</span>
+            </div>
+
+            <div className="mt-3 grid gap-3 grid-cols-1">
+              {sortedCalendar.map((item) => (
+                <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+                    <CalendarClock className="h-4 w-4 text-slate-500" />
+                  </div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    {normalizeDate(item.date)} • {item.time}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-700">{item.location}</p>
+                  {item.note ? <p className="mt-1 text-xs text-slate-600">{item.note}</p> : null}
+                </article>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
-
-      <section className="teams-panel">
-        <div className="teams-panel-head">
-          <h3 className="teams-title text-xl">Přesný harmonogram akcí v kalendáři</h3>
-          <span className="teams-pill">{sortedCalendar.length} zápisů</span>
-        </div>
-
-        <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {sortedCalendar.map((item) => (
-            <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <div className="mb-2 flex items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                <CalendarClock className="h-4 w-4 text-slate-500" />
-              </div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                {normalizeDate(item.date)} • {item.time}
-              </p>
-              <p className="mt-1 text-sm text-slate-700">{item.location}</p>
-              {item.note ? <p className="mt-1 text-xs text-slate-600">{item.note}</p> : null}
-            </article>
-          ))}
-        </div>
-      </section>
 
       <section className="teams-panel border-[#e1e7ff] bg-[#f7f9ff]">
         <div className="flex items-center gap-2 text-sm font-semibold text-[#2f3b88]">
