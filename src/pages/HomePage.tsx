@@ -31,7 +31,7 @@ export function HomePage() {
         </div>
       </aside>
 
-      <aside className="pointer-events-none fixed right-0 top-[96px] z-50 hidden h-[calc(100vh-120px)] w-screen translate-x-full transition-transform duration-[875ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0 focus-within:translate-x-0 xl:block">
+      <aside className="pointer-events-none fixed right-0 top-[96px] z-50 hidden h-[calc(100vh-120px)] w-[min(96vw,1450px)] translate-x-full transition-transform duration-[875ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0 focus-within:translate-x-0 xl:block">
         <div className="pointer-events-auto relative h-full w-full rounded-l-2xl border border-slate-200 bg-white/98 p-6 shadow-[-18px_0_45px_rgba(15,23,42,0.16)] backdrop-blur">
           <button
             type="button"
