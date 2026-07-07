@@ -102,7 +102,7 @@ export function HomePage() {
           <div className="pointer-events-auto relative h-full w-full rounded-l-2xl border border-slate-200 bg-white/98 p-6 shadow-[-18px_0_45px_rgba(15,23,42,0.16)] backdrop-blur">
             <button
               type="button"
-              className="absolute left-[-40px] top-[280px] inline-flex h-40 w-10 items-center justify-center rounded-l-2xl border border-r-0 border-sky-600 bg-sky-600 px-1 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white shadow-[-8px_10px_18px_rgba(3,105,161,0.35)] [text-orientation:mixed] [writing-mode:vertical-rl]"
+              className="absolute left-[-40px] top-[260px] inline-flex h-40 w-10 items-center justify-center rounded-l-2xl border border-r-0 border-sky-600 bg-sky-600 px-1 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white shadow-[-8px_10px_18px_rgba(3,105,161,0.35)] [text-orientation:mixed] [writing-mode:vertical-rl]"
               aria-label="Zobrazit novinky"
             >
               Novinky
