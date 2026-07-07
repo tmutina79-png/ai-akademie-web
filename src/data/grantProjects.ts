@@ -80,13 +80,15 @@ export const grantProjects: GrantProject[] = [
       {
         id: 'tl-2',
         date: '2026-03-15',
-        title: 'Školení pedagogů (leden - srpen)',
+        title: 'Školení pedagogů (leden - říjen)',
         description:
-          'Dva garanti projektu procházejí intenzivním profesním rozvojem v oblasti generativní AI, vývoje aplikací a vibecodingu včetně metodické přípravy ukázkových úloh.',
+          'Garanti projektu procházejí intenzivním profesním rozvojem v oblasti generativní AI, vývoje aplikací, GitHub Copilotu a praktického využití AI ve výuce i projektové práci.',
         status: 'probiha',
         details: [
-          'Generativní AI ve vzdělávání (20. 1. 2026, externí vzdělávací platforma).',
-          'Vibecoding pro pedagogy (8. 4. 2026, VŠB-TU Ostrava).',
+          'AI v praxi: od nápadu k prototypu (březen - květen 2026, Masarykova univerzita, online).',
+          'Počítač ve škole 2026 (31. 3. - 2. 4. 2026, Nové Město na Moravě, prezenční účast).',
+          'MODAM 2026 (12. 6. 2026, FEI VŠB-TU Ostrava).',
+          'GitHub Copilot ve VS Code (16. 6. 2026, online školení).',
           'Průběžná příprava metodických úloh pro žáky.',
         ],
       },
@@ -161,11 +163,11 @@ export const grantProjects: GrantProject[] = [
         date: '2026-11-04',
         title: 'AI ve Studentské firmě MGO a implementace v praxi',
         description:
-          'Dopolední workshop s Ing. Tomášem Mutinou a odpolední případová studie s Mgr. Janou Moricovou.',
+          'Akci připravuje Mgr. Jana Moricová se svými žáky. Program je zaměřený na AI ve studentské firmě a její praktickou implementaci.',
         status: 'planovano',
         details: [
-          'Dopolední blok: expert Ing. Tomáš Mutina.',
-          'Odpolední blok: případová studie studentské firmy MGO.',
+          'Akci připravuje Mgr. Jana Moricová se svými žáky.',
+          'Program je zaměřený na AI ve studentské firmě a její praktickou implementaci.',
         ],
       },
       {
@@ -181,17 +183,31 @@ export const grantProjects: GrantProject[] = [
     trainings: [
       {
         id: 'tr-1',
-        date: '2026-01-20',
-        title: 'Generativní AI ve vzdělávání',
-        provider: 'Externí vzdělávací platforma',
-        note: 'Intenzivní příprava garantů na pokročilé využití generativních AI nástrojů ve výuce.',
+        date: '2026-03-01',
+        title: 'AI v praxi: od nápadu k prototypu',
+        provider: 'Masarykova univerzita, online',
+        note: 'Průběžné online školení v období březen až květen 2026 zaměřené na převod nápadu do funkčního AI prototypu.',
       },
       {
         id: 'tr-2',
-        date: '2026-04-08',
-        title: 'Vibecoding pro pedagogy',
-        provider: 'VŠB-TU Ostrava',
-        note: 'Praktický workshop k vývoji aplikací, tvorbě zadání a metodickému vedení studentských projektů.',
+        date: '2026-03-31',
+        title: 'Počítač ve škole 2026',
+        provider: 'Nové Město na Moravě',
+        note: 'Prezenční účast na konferenci v termínu 31. 3. - 2. 4. 2026 se zaměřením na digitální vzdělávání a školní inovace.',
+      },
+      {
+        id: 'tr-3',
+        date: '2026-06-12',
+        title: 'MODAM 2026',
+        provider: 'FEI VŠB-TU Ostrava',
+        note: 'Odborný program zaměřený na moderní digitální a AI přístupy ve vzdělávání a technické praxi.',
+      },
+      {
+        id: 'tr-4',
+        date: '2026-06-16',
+        title: 'GitHub Copilot ve VS Code',
+        provider: 'Online školení',
+        note: 'Praktické školení zaměřené na využití GitHub Copilotu ve Visual Studio Code při výuce, tvorbě zadání a programování.',
       },
     ],
     leaflets: [
@@ -213,6 +229,38 @@ export const grantProjects: GrantProject[] = [
     calendar: [
       {
         id: 'cal-1',
+        date: '2026-03-01',
+        time: 'březen - květen 2026',
+        title: 'AI v praxi: od nápadu k prototypu',
+        location: 'Masarykova univerzita, online',
+        note: 'Průběžné online školení zaměřené na praktickou cestu od návrhu AI řešení k funkčnímu prototypu.',
+      },
+      {
+        id: 'cal-2',
+        date: '2026-03-31',
+        time: '31. 3. - 2. 4. 2026',
+        title: 'Počítač ve škole 2026',
+        location: 'Nové Město na Moravě',
+        note: 'Prezenční účast na konferenci zaměřené na digitální vzdělávání, technologie ve škole a sdílení pedagogické praxe.',
+      },
+      {
+        id: 'cal-3',
+        date: '2026-06-12',
+        time: '12. 6. 2026',
+        title: 'MODAM 2026',
+        location: 'FEI VŠB-TU Ostrava',
+        note: 'Odborná akce věnovaná moderním digitálním a AI přístupům s přesahem do vzdělávání a technické praxe.',
+      },
+      {
+        id: 'cal-4',
+        date: '2026-06-16',
+        time: 'online školení',
+        title: 'GitHub Copilot ve VS Code',
+        location: 'Online',
+        note: 'Praktické školení k efektivnímu využití GitHub Copilotu při programování, tvorbě zadání a práci učitele.',
+      },
+      {
+        id: 'cal-5',
         date: '2026-09-22',
         time: '13:00',
         title: 'Workshop s externím partnerem z VŠB-TUO',
@@ -220,7 +268,7 @@ export const grantProjects: GrantProject[] = [
         note: 'Odborná přednáška a praktický workshop s univerzitním partnerem.',
       },
       {
-        id: 'cal-2',
+        id: 'cal-6',
         date: '2026-11-02',
         time: '13:30',
         title: 'Workshop: Vibecoding',
@@ -228,7 +276,7 @@ export const grantProjects: GrantProject[] = [
         note: 'Praktické nasazení AI nástrojů pro rychlý vývoj aplikací a generování kódu.',
       },
       {
-        id: 'cal-3',
+        id: 'cal-7',
         date: '2026-11-04',
         time: '09:00',
         title: 'AI ve Studentské firmě MGO a implementace v praxi',
@@ -236,7 +284,7 @@ export const grantProjects: GrantProject[] = [
         note: 'Dopolední blok s Ing. Tomášem Mutinou, odpolední případová studie s Mgr. Janou Moricovou.',
       },
       {
-        id: 'cal-4',
+        id: 'cal-8',
         date: '2026-11-05',
         time: '13:00',
         title: 'Prezentace hotových produktů žáků MGO',

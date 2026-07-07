@@ -67,7 +67,8 @@ export const realizationMilestones: RealizationMilestone[] = [
     id: 'milestone-3',
     date: '4. listopadu 2026',
     title: 'AI ve Studentské firmě MGO a implementace v praxi',
-    description: 'Dopolední workshop s Ing. Tomášem Mutinou a odpolední případová studie s Mgr. Janou Moricovou.',
+    description:
+      'Akci připravuje Mgr. Jana Moricová se svými žáky. Program je zaměřený na AI ve studentské firmě a její praktickou implementaci.',
   },
   {
     id: 'milestone-4',

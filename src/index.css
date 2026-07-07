@@ -214,3 +214,12 @@ h4 {
     transition: none;
   }
 }
+
+.upcoming-events-scroll {
+  scrollbar-width: none;
+}
+
+.upcoming-events-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
