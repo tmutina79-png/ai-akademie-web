@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { PhotoLightbox, type LightboxPhoto } from '../components/gallery/PhotoLightbox'
 import { homeEvents } from '../data/homeEvents'
 import { PageHeader } from '../components/ui/PageHeader'
+import { assetPath } from '../utils/assetPath'
 
 const PHOTOS_PER_PAGE = 6
 const MEDIA_PLACEHOLDER = 'Po uskutečnění události budou přidány fotky a videa.'
@@ -53,18 +54,18 @@ const showcaseEvents: ShowcaseEvent[] = [
     summary:
       'Naši žáci z Matičního gymnázia Ostrava připravili pro žáky základních škol interaktivní dopoledne zaměřené na programování, AI, robotiku a práci s moderní digitální technikou.',
     photos: [
-      '/events/zazitkove-odpoledne/IMG_5388.JPG',
-      '/events/zazitkove-odpoledne/IMG_5390.JPG',
-      '/events/zazitkove-odpoledne/IMG_5391.JPG',
-      '/events/zazitkove-odpoledne/IMG_5392.JPG',
-      '/events/zazitkove-odpoledne/IMG_5393.JPG',
-      '/events/zazitkove-odpoledne/IMG_5394.JPG',
-      '/events/zazitkove-odpoledne/IMG_5408.JPG',
-      '/events/zazitkove-odpoledne/IMG_5409.JPG',
-      '/events/zazitkove-odpoledne/IMG_5410.JPG',
-      '/events/zazitkove-odpoledne/IMG_5411.JPG',
+      assetPath('events/zazitkove-odpoledne/IMG_5388.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5390.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5391.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5392.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5393.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5394.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5408.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5409.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5410.JPG'),
+      assetPath('events/zazitkove-odpoledne/IMG_5411.JPG'),
     ],
-    videoEmbedUrl: '/events/zazitkove-odpoledne/IMG_5396-muted.mp4',
+    videoEmbedUrl: assetPath('events/zazitkove-odpoledne/IMG_5396-muted.mp4'),
   },
 ]
 

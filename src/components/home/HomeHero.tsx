@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { homeEvents } from '../../data/homeEvents'
 import { projects } from '../../data/projects'
+import { assetPath } from '../../utils/assetPath'
 
 const personNamePattern = /\b(?:Ing\.|Mgr\.)?\s*[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ][a-záčďéěíňóřšťúůýž]+(?:\s+[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ][a-záčďéěíňóřšťúůýž]+)+/g
 
@@ -84,10 +85,10 @@ export function HomeHero() {
         <div className="hidden lg:block">
           <div className="grid content-center gap-4">
             <div className="partner-logo-frame flex h-[150px] items-center justify-center rounded-3xl border border-indigo-100 bg-white p-4 shadow-[0_8px_24px_rgba(68,71,145,0.15)]">
-              <img src="/ostrava-logo.png" alt="Ostrava" className="partner-logo-ostrava" />
+              <img src={assetPath('ostrava-logo.png')} alt="Ostrava" className="partner-logo-ostrava" />
             </div>
             <div className="partner-logo-frame flex h-[150px] items-center justify-center rounded-3xl border border-indigo-100 bg-white p-4 shadow-[0_8px_24px_rgba(68,71,145,0.15)]">
-              <img src="/msk-logo.png" alt="Moravskoslezský kraj" className="partner-logo-msk" />
+              <img src={assetPath('msk-logo.png')} alt="Moravskoslezský kraj" className="partner-logo-msk" />
             </div>
           </div>
         </div>
