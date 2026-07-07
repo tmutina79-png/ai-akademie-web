@@ -11,6 +11,19 @@ export function HomePage() {
   const [showFundingModal, setShowFundingModal] = useState(true)
 
   useEffect(() => {
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        setShowFundingModal(true)
+      }
+    }
+
+    window.addEventListener('pageshow', handlePageShow)
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow)
+    }
+  }, [])
+
+  useEffect(() => {
     if (!showFundingModal) return
 
     const originalOverflow = document.body.style.overflow
