@@ -71,10 +71,7 @@ function getUpcomingEvents(events: HomeEventItem[], baseDate: Date) {
 export function HomeEventsCalendar() {
   const today = useMemo(() => new Date(), [])
   const [viewedMonth, setViewedMonth] = useState(() => startOfMonth(today))
-  const [selectedDate, setSelectedDate] = useState(() => {
-    const firstEventInCurrentMonth = homeEvents.find((event) => sameMonth(new Date(event.date), today))
-    return firstEventInCurrentMonth?.date ?? toIsoDateLocal(startOfMonth(today))
-  })
+  const [selectedDate, setSelectedDate] = useState(() => toIsoDateLocal(today))
   const [selectedEventByDate, setSelectedEventByDate] = useState<Record<string, string>>({})
   const monthLabel = new Intl.DateTimeFormat('cs-CZ', { month: 'long', year: 'numeric' }).format(viewedMonth)
 
