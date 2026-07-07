@@ -30,19 +30,36 @@ export function Navbar() {
     setMobileOpen(false)
   }
 
+  const navigateHomeWithReload = () => {
+    closeMenu()
+
+    const currentHash = window.location.hash || '#/'
+    if (currentHash === '#/' || currentHash === '#') {
+      window.location.reload()
+      return
+    }
+
+    window.location.assign(homeHref)
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <a href={homeHref} aria-label="Domů" onClick={closeMenu}>
+        <button type="button" aria-label="Domů" onClick={navigateHomeWithReload}>
           <BrandMark />
-        </a>
+        </button>
 
         <nav className="hidden items-center gap-1 lg:flex">
           {links.map((link) => (
             link.to === '/' ? (
-              <a key={link.to} href={homeHref} className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700">
+              <button
+                key={link.to}
+                type="button"
+                onClick={navigateHomeWithReload}
+                className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700"
+              >
                 {link.label}
-              </a>
+              </button>
             ) : (
               <NavLink key={link.to} to={link.to} className={navLinkClass}>
                 {link.label}
@@ -75,14 +92,14 @@ export function Navbar() {
           <nav className="flex flex-col gap-2">
             {links.map((link) => (
               link.to === '/' ? (
-                <a
+                <button
                   key={link.to}
-                  href={homeHref}
+                  type="button"
                   className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700"
-                  onClick={closeMenu}
+                  onClick={navigateHomeWithReload}
                 >
                   {link.label}
-                </a>
+                </button>
               ) : (
                 <NavLink
                   key={link.to}
