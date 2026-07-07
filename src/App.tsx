@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from './components/layout/AppLayout'
 import { EventPlannerPage } from './pages/EventPlannerPage'
 import { GalleryEventDetailPage } from './pages/GalleryEventDetailPage'
@@ -16,7 +16,7 @@ import { TeacherAcademyPage } from './pages/TeacherAcademyPage'
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />
@@ -36,7 +36,7 @@ function App() {
           <Route path="/prihlaseni" element={<LoginPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
