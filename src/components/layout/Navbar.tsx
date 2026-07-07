@@ -21,6 +21,8 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : 'text-slate-600 hover:text-indigo-700',
   ].join(' ')
 
+const homeHref = `${import.meta.env.BASE_URL}#/`
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -31,15 +33,21 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <NavLink to="/" aria-label="Domů" onClick={closeMenu}>
+        <a href={homeHref} aria-label="Domů" onClick={closeMenu}>
           <BrandMark />
-        </NavLink>
+        </a>
 
         <nav className="hidden items-center gap-1 lg:flex">
           {links.map((link) => (
-            <NavLink key={link.to} to={link.to} className={navLinkClass}>
-              {link.label}
-            </NavLink>
+            link.to === '/' ? (
+              <a key={link.to} href={homeHref} className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700">
+                {link.label}
+              </a>
+            ) : (
+              <NavLink key={link.to} to={link.to} className={navLinkClass}>
+                {link.label}
+              </NavLink>
+            )
           ))}
         </nav>
 
@@ -66,14 +74,25 @@ export function Navbar() {
         <div className="border-t border-slate-200 px-4 py-3 lg:hidden">
           <nav className="flex flex-col gap-2">
             {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={navLinkClass}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </NavLink>
+              link.to === '/' ? (
+                <a
+                  key={link.to}
+                  href={homeHref}
+                  className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700"
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={navLinkClass}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </NavLink>
+              )
             ))}
             <NavLink
               to="/prihlaseni"
