@@ -69,7 +69,7 @@ function getUpcomingEvents(events: HomeEventItem[], baseDate: Date) {
 }
 
 export function HomeEventsCalendar() {
-  const today = useMemo(() => new Date('2026-07-04T12:00:00'), [])
+  const today = useMemo(() => new Date(), [])
   const [viewedMonth, setViewedMonth] = useState(() => startOfMonth(today))
   const [selectedDate, setSelectedDate] = useState(() => {
     const firstEventInCurrentMonth = homeEvents.find((event) => sameMonth(new Date(event.date), today))
