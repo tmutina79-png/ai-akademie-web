@@ -1,6 +1,6 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { BrandMark } from '../ui/BrandMark'
 
 const links = [
@@ -13,58 +13,60 @@ const links = [
   { to: '/dotacni-projekty', label: 'Dotační projekty' },
 ]
 
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  [
-    'relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold transition-all',
-    isActive
-      ? 'border-indigo-700 text-indigo-700'
-      : 'text-slate-600 hover:text-indigo-700',
-  ].join(' ')
-
-const homeHref = `${import.meta.env.BASE_URL}#/`
-
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
   const closeMenu = () => {
     setMobileOpen(false)
   }
 
-  const navigateHomeWithReload = () => {
+  const navigateMenuLink = (targetPath: string) => {
     closeMenu()
 
-    const currentHash = window.location.hash || '#/'
-    if (currentHash === '#/' || currentHash === '#') {
+    const normalizedTargetPath = targetPath === '/' ? '/' : targetPath
+    const targetHref = `${import.meta.env.BASE_URL}#${normalizedTargetPath}`
+    const currentPath = location.pathname || '/'
+
+    if (currentPath === normalizedTargetPath) {
       window.location.reload()
       return
     }
 
-    window.location.assign(homeHref)
+    window.location.assign(targetHref)
+  }
+
+  const getMenuButtonClass = (targetPath: string) => {
+    const isActive =
+      targetPath === '/'
+        ? location.pathname === '/'
+        : location.pathname === targetPath || location.pathname.startsWith(`${targetPath}/`)
+
+    return [
+      'relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold transition-all',
+      isActive
+        ? 'border-indigo-700 text-indigo-700'
+        : 'text-slate-600 hover:text-indigo-700',
+    ].join(' ')
   }
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <button type="button" aria-label="Domů" onClick={navigateHomeWithReload}>
+        <button type="button" aria-label="Domů" onClick={() => navigateMenuLink('/')}>
           <BrandMark />
         </button>
 
         <nav className="hidden items-center gap-1 lg:flex">
           {links.map((link) => (
-            link.to === '/' ? (
-              <button
-                key={link.to}
-                type="button"
-                onClick={navigateHomeWithReload}
-                className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700"
-              >
-                {link.label}
-              </button>
-            ) : (
-              <NavLink key={link.to} to={link.to} className={navLinkClass}>
-                {link.label}
-              </NavLink>
-            )
+            <button
+              key={link.to}
+              type="button"
+              onClick={() => navigateMenuLink(link.to)}
+              className={getMenuButtonClass(link.to)}
+            >
+              {link.label}
+            </button>
           ))}
         </nav>
 
@@ -91,25 +93,14 @@ export function Navbar() {
         <div className="border-t border-slate-200 px-4 py-3 lg:hidden">
           <nav className="flex flex-col gap-2">
             {links.map((link) => (
-              link.to === '/' ? (
-                <button
-                  key={link.to}
-                  type="button"
-                  className="relative border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-600 transition-all hover:text-indigo-700"
-                  onClick={navigateHomeWithReload}
-                >
-                  {link.label}
-                </button>
-              ) : (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  className={navLinkClass}
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </NavLink>
-              )
+              <button
+                key={link.to}
+                type="button"
+                className={getMenuButtonClass(link.to)}
+                onClick={() => navigateMenuLink(link.to)}
+              >
+                {link.label}
+              </button>
             ))}
             <NavLink
               to="/prihlaseni"
