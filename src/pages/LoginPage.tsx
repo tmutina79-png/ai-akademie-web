@@ -11,6 +11,10 @@ export function LoginPage() {
         icon={LogIn}
       />
 
+      <p className="text-center text-lg font-bold text-red-600 md:text-xl">
+        Přístupy se připravují.
+      </p>
+
       <section className="teams-grid md:grid-cols-2">
         <article className="teams-card">
           <h2 className="teams-title text-lg">Přihlášení pro žáky</h2>
