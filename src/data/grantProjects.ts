@@ -70,7 +70,7 @@ export const grantProjects: GrantProject[] = [
         date: '2026-01-10',
         title: 'Prvotní fáze projektu a příprava zázemí',
         description:
-          'Projekt byl schválen, byla podepsána veřejnoprávní smlouva (ev. č. 0568/2026/Kaš) a připraven nákup techniky: 7 iPadů, výkonné PC a dataprojektoru.',
+          'Projekt byl schválen, byla podepsána veřejnoprávní smlouva (ev. č. 0568/2026/Kaš) a projekt je připraven k realizaci.',
         status: 'hotovo',
         details: [
           'Byla uzavřena veřejnoprávní smlouva 0568/2026/Kaš.',
@@ -126,6 +126,18 @@ export const grantProjects: GrantProject[] = [
         details: [
           'Domluven odborný program pro podzimní workshopové bloky.',
           'Nastaveno průběžné metodické konzultování s univerzitním partnerem.',
+        ],
+      },
+      {
+        id: 'tl-4b',
+        date: '2026-09-01',
+        title: 'Nákup HW a SW (srpen - září)',
+        description:
+          'V období srpen až září dojde k nakoupení potřebného hardwaru a softwaru pro realizaci projektu.',
+        status: 'planovano',
+        details: [
+          'Pořízení hardwarového vybavení pro výuku a workshopové aktivity.',
+          'Pořízení a instalace potřebného softwarového zázemí.',
         ],
       },
       {
