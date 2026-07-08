@@ -75,13 +75,15 @@ export function PhotoLightbox({ photos, initialIndex, onClose }: PhotoLightboxPr
         <ChevronLeft className="h-5 w-5" />
       </button>
 
-      <div className="w-full max-w-5xl overflow-hidden rounded-2xl border border-white/20 bg-slate-900/95 shadow-[0_26px_70px_rgba(15,23,42,0.55)]">
-        <img
-          src={activePhoto.image}
-          alt={activePhoto.title}
-          className="max-h-[68vh] w-full object-cover md:max-h-[74vh]"
-        />
-        <div className="space-y-1.5 p-4 md:p-5">
+      <div className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/20 bg-slate-900/95 shadow-[0_26px_70px_rgba(15,23,42,0.55)]">
+        <div className="flex min-h-0 flex-1 items-center justify-center bg-slate-950 p-2 md:p-3">
+          <img
+            src={activePhoto.image}
+            alt={activePhoto.title}
+            className="h-auto max-h-full w-auto max-w-full object-contain"
+          />
+        </div>
+        <div className="shrink-0 space-y-1.5 p-4 md:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full border border-indigo-300/45 bg-indigo-500/20 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-indigo-100">
               {activePhoto.eventTag}

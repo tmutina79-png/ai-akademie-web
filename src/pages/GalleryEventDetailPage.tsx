@@ -44,15 +44,15 @@ export function GalleryEventDetailPage() {
               type="button"
               onClick={() => setLightboxIndex(index)}
               className="group relative overflow-hidden rounded-xl border border-slate-200 text-left shadow-[0_6px_16px_rgba(15,23,42,0.1)]"
+              aria-label={`Otevřít fotku: ${photo.title}`}
             >
-              <img
-                src={photo.image}
-                alt={photo.title}
-                className="h-44 w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                loading="lazy"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-2.5">
-                <p className="line-clamp-2 text-xs font-semibold text-white">{photo.title}</p>
+              <div className="flex h-48 items-center justify-center bg-[linear-gradient(160deg,#f8fafc_0%,#eef2ff_100%)] px-3 py-3">
+                <img
+                  src={photo.image}
+                  alt={photo.title}
+                  className="max-h-full max-w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
               </div>
             </button>
           ))}

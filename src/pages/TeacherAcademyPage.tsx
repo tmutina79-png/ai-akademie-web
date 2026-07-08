@@ -1,9 +1,35 @@
-import { BookOpenCheck, FolderKanban, Layers3, Presentation, Sparkles } from 'lucide-react'
+import { BookOpenCheck, FolderKanban, Layers3, Presentation, Sparkles, X } from 'lucide-react'
+import { useState } from 'react'
 import { PageHeader } from '../components/ui/PageHeader'
 
 export function TeacherAcademyPage() {
+  const [showPreparingModal, setShowPreparingModal] = useState(true)
+
   return (
     <div className="teams-shell">
+      {showPreparingModal ? (
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/45 px-4 backdrop-blur-md">
+          <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-2xl md:p-10">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-lg font-semibold text-slate-900 md:text-2xl">Oznámení</p>
+                <p className="mt-3 max-w-3xl text-lg font-bold leading-relaxed text-slate-800 md:text-2xl">
+                  Stránka se momentálně připravuje, po dokončéní bude zpřístupněná žáků i učitelů.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPreparingModal(false)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                aria-label="Zavřít oznámení"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <PageHeader
         title="Naše tvorba & Materiály"
         subtitle="Pracovní prostor pro učitele a tým AI akademie: sdílené výstupy, metodické podklady, prezentace a materiály připravené k okamžitému použití ve výuce."

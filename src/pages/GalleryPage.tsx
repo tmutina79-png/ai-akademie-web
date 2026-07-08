@@ -112,16 +112,18 @@ export function GalleryPage() {
               ].join(' ')}
             >
               {eventCard.cover ? (
-                <img
-                  src={eventCard.cover.image}
-                  alt={eventCard.eventTag}
-                  className="h-40 w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
+                <div className="flex h-48 items-center justify-center bg-[linear-gradient(160deg,#f8fafc_0%,#eef2ff_100%)] px-3 py-3">
+                  <img
+                    src={eventCard.cover.image}
+                    alt={eventCard.eventTag}
+                    className="max-h-full max-w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                </div>
               ) : null}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-3">
-                <p className="text-sm font-bold text-white">{eventCard.eventTag}</p>
-                <p className="text-xs text-slate-200">{eventCard.count} fotek</p>
+              <div className="p-3">
+                <p className="text-xs font-semibold text-slate-600">{eventCard.count} fotek</p>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-indigo-700">Otevřít událost</p>
               </div>
             </Link>
           ))}
@@ -144,18 +146,15 @@ export function GalleryPage() {
                 setLightboxIndex(index)
               }}
               className="group relative overflow-hidden rounded-xl border border-slate-200 text-left shadow-[0_6px_16px_rgba(15,23,42,0.1)]"
+              aria-label={`Otevřít fotku: ${photo.title}`}
             >
-              <img
-                src={photo.image}
-                alt={photo.title}
-                className="h-40 w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                loading="lazy"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-2.5">
-                <p className="line-clamp-2 text-xs font-semibold text-white">{photo.title}</p>
-                <span className="absolute bottom-1.5 right-1.5 rounded-full border border-white/35 bg-slate-950/55 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-white backdrop-blur-sm">
-                  {photo.eventTag}
-                </span>
+              <div className="flex h-48 items-center justify-center bg-[linear-gradient(160deg,#f8fafc_0%,#eef2ff_100%)] px-3 py-3">
+                <img
+                  src={photo.image}
+                  alt={photo.title}
+                  className="max-h-full max-w-full rounded-lg object-contain transition duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
               </div>
             </button>
           ))}

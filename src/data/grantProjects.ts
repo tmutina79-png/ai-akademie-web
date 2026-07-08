@@ -133,11 +133,24 @@ export const grantProjects: GrantProject[] = [
         date: '2026-09-05',
         title: 'Příprava, marketing a zápis žáků',
         description:
-          'Spuštění náborové kampaně, otevření zápisu do kroužku AI akademie, převzetí techniky, instalace AI aplikací a povinné označení majetku financování.',
+          'Spuštění náborové kampaně, otevření zápisu do AI Code Club MGO, převzetí techniky, instalace AI aplikací a povinné označení majetku financování.',
         status: 'probiha',
         details: [
           'Probíhá propagace mezi žáky a třídami.',
           'Dokončuje se příprava promo materiálů k podzimnímu programu.',
+        ],
+      },
+      {
+        id: 'tl-5b',
+        date: '2026-09-15',
+        title: 'Vytvoření 3 produktů (květen - září 2026)',
+        description:
+          'V období květen až září byly v rámci projektu připraveny a rozvinuty tři konkrétní produktové výstupy publikované v sekci Projekty.',
+        status: 'hotovo',
+        details: [
+          'Příprava webové stránky AI akademie.',
+          'Chatbot MATY na stránkach Matičního gymnázia Ostrava.',
+          'Webové stránky s možností online přihlášení na Olympiádu MGO.',
         ],
       },
       {
@@ -161,7 +174,7 @@ export const grantProjects: GrantProject[] = [
       {
         id: 'tl-8',
         date: '2026-11-04',
-        title: 'AI ve Studentské firmě MGO a implementace v praxi',
+        title: 'Workshop: AI ve Studentské firmě MGO a implementace v praxi',
         description:
           'Akci připravuje Mgr. Jana Moricová se svými žáky. Program je zaměřený na AI ve studentské firmě a její praktickou implementaci.',
         status: 'planovano',
@@ -173,11 +186,35 @@ export const grantProjects: GrantProject[] = [
       {
         id: 'tl-9',
         date: '2026-11-05',
-        title: 'Prezentace hotových produktů žáků MGO',
+        title: 'Workshop: Prezentace hotových produktů žáků MGO',
         description:
           'Slavnostní prezentace hotových projektů, webů a 3D modelů vytvořených za pomoci AI.',
         status: 'planovano',
         details: ['Závěrečné veřejné představení výstupů žáků a evaluace projektu.'],
+      },
+      {
+        id: 'tl-10',
+        date: '2026-11-30',
+        title: 'Ukončení realizace projektu (věcná část)',
+        description:
+          'Do tohoto data musí být dokončena věcná realizace projektu Matiční AI Akademie v souladu se smlouvou.',
+        status: 'planovano',
+        details: [
+          'Termín dokončení realizace projektu: 30. 11. 2026.',
+          'Do tohoto data musí být dosaženo účelu dotace a uhrazeny uznatelné výdaje v období realizace.',
+        ],
+      },
+      {
+        id: 'tl-11',
+        date: '2026-12-11',
+        title: 'Závěrečná zpráva a finanční vypořádání dotace',
+        description:
+          'Nejpozdější termín pro odevzdání závěrečné zprávy a finančního vypořádání dotace poskytovateli.',
+        status: 'planovano',
+        details: [
+          'Termín předložení finančního vypořádání (včetně závěrečné zprávy): nejpozději 11. 12. 2026.',
+          'Nevyčerpané prostředky nad 10 Kč musí být vráceny nejpozději ve stejné lhůtě.',
+        ],
       },
     ],
     trainings: [
@@ -279,7 +316,7 @@ export const grantProjects: GrantProject[] = [
         id: 'cal-7',
         date: '2026-11-04',
         time: '09:00',
-        title: 'AI ve Studentské firmě MGO a implementace v praxi',
+        title: 'Workshop: AI ve Studentské firmě MGO a implementace v praxi',
         location: 'AULA MGO',
         note: 'Dopolední blok s Ing. Tomášem Mutinou, odpolední případová studie s Mgr. Janou Moricovou.',
       },
@@ -287,7 +324,7 @@ export const grantProjects: GrantProject[] = [
         id: 'cal-8',
         date: '2026-11-05',
         time: '13:00',
-        title: 'Prezentace hotových produktů žáků MGO',
+        title: 'Workshop: Prezentace hotových produktů žáků MGO',
         location: 'AULA MGO',
         note: 'Slavnostní prezentace projektu, webů a 3D modelů vytvořených v rámci AI akademie.',
       },

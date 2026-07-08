@@ -5,6 +5,7 @@ import { GalleryEventDetailPage } from './pages/GalleryEventDetailPage'
 import { GalleryPage } from './pages/GalleryPage'
 import { GrantProjectsPage } from './pages/GrantProjectsPage'
 import { GrantProjectDetailPage } from './pages/GrantProjectDetailPage'
+import { GrantFinalReportPdfPage } from './pages/GrantFinalReportPdfPage'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
 import { NewsDetailPage } from './pages/NewsDetailPage'
@@ -33,6 +34,7 @@ function App() {
           <Route path="/novinky/:newsId" element={<NewsDetailPage />} />
           <Route path="/dotacni-projekty" element={<GrantProjectsPage />} />
           <Route path="/dotacni-projekty/:grantProjectId" element={<GrantProjectDetailPage />} />
+          <Route path="/dotacni-projekty/:grantProjectId/zaverecna-zprava" element={<GrantFinalReportPdfPage />} />
           <Route path="/prihlaseni" element={<LoginPage />} />
         </Route>
       </Routes>

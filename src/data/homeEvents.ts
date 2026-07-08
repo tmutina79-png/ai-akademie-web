@@ -17,6 +17,21 @@ export type HomeEventItem = {
 
 export const homeEvents: HomeEventItem[] = [
   {
+    id: 'home-event-vibecoding-2026-03-24',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Workshop vedl Ing. Tomáš Mutina pro žáky vyššího gymnázia. Vibecoding ukázal, jak převést nápad do funkční aplikace pomocí AI asistenta a dobře napsaných promptů. Žáci si prakticky vyzkoušeli nástroje jako GitHub Copilot, ChatGPT, Claude a VS Code, řešili tvorbu prototypu, ladění chyb i odpovědné používání AI při vývoji.',
+    date: '2026-03-24',
+    startTime: '09:00',
+    endTime: '12:30',
+    category: 'Přednáška',
+    location: 'Matiční gymnázium Ostrava',
+    host: 'Ing. Tomáš Mutina',
+    priority: 'Vysoká',
+    reminder: '1 den předem',
+    recurring: 'Ne',
+  },
+  {
     id: 'home-event-zsbohuminska',
     title: 'Zážitkové odpoledne s programováním a robotikou',
     description:
