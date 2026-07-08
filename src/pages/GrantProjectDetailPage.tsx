@@ -5,6 +5,7 @@ import {
   ChevronDown,
   Circle,
   Clock3,
+  FileText,
   GraduationCap,
 } from 'lucide-react'
 import { useMemo, useState } from 'react'
@@ -74,6 +75,14 @@ function sortByDate<T extends { date: string; time?: string }>(items: T[]) {
   })
 }
 
+function isUpcoming(date: string) {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const target = new Date(date)
+  target.setHours(0, 0, 0, 0)
+  return target >= today
+}
+
 export function GrantProjectDetailPage() {
   const { grantProjectId } = useParams()
   const [expandedTimelineId, setExpandedTimelineId] = useState<string | null>(null)
@@ -93,6 +102,14 @@ export function GrantProjectDetailPage() {
     [selectedProject],
   )
 
+  const upcomingWorkshops = useMemo(
+    () =>
+      sortedCalendar.filter(
+        (item) => item.title.toLowerCase().includes('workshop') && isUpcoming(item.date),
+      ),
+    [sortedCalendar],
+  )
+
   if (!selectedProject) {
     return <Navigate to="/dotacni-projekty" replace />
   }
@@ -110,6 +127,16 @@ export function GrantProjectDetailPage() {
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Zpět na dotační projekty
+        </Link>
+      </div>
+
+      <div className="flex justify-end">
+        <Link
+          to={`/dotacni-projekty/${selectedProject.id}/zaverecna-zprava`}
+          className="inline-flex items-center gap-2 rounded-md border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100"
+        >
+          <FileText className="h-4 w-4" />
+          Zobrazení závěrečné zprávy
         </Link>
       </div>
 
@@ -216,12 +243,12 @@ export function GrantProjectDetailPage() {
 
           <section className="teams-panel">
             <div className="teams-panel-head">
-              <h3 className="teams-title text-xl">Přesný harmonogram akcí v kalendáři</h3>
-              <span className="teams-pill">{sortedCalendar.length} zápisů</span>
+              <h3 className="teams-title text-xl">Přesný harmonogram workshopů v kalendáři</h3>
+              <span className="teams-pill">{upcomingWorkshops.length} zápisů</span>
             </div>
 
             <div className="mt-3 grid gap-3 grid-cols-1">
-              {sortedCalendar.map((item) => (
+              {upcomingWorkshops.map((item) => (
                 <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                   <div className="mb-2 flex items-center justify-between gap-2">
                     <p className="text-sm font-semibold text-slate-900">{item.title}</p>
@@ -234,6 +261,12 @@ export function GrantProjectDetailPage() {
                   {item.note ? <p className="mt-1 text-xs text-slate-600">{item.note}</p> : null}
                 </article>
               ))}
+
+              {!upcomingWorkshops.length ? (
+                <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-600">
+                  Aktuálně nejsou evidované žádné nadcházející workshopy.
+                </div>
+              ) : null}
             </div>
           </section>
         </div>

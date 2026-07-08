@@ -30,6 +30,33 @@ type ShowcaseEvent = {
 
 const showcaseEvents: ShowcaseEvent[] = [
   {
+    id: 'event-vibecoding-2026-03-24',
+    title: 'Vibecoding pro vyšší gymnázium',
+    date: '2026-03-24',
+    timeRange: '09:00 - 12:30',
+    location: 'Matiční gymnázium Ostrava',
+    participants: ['Vyšší gymnázium MGO', 'Ing. Tomáš Mutina'],
+    participantGroups: {
+      institutions: ['Matiční gymnázium Ostrava'],
+      teachers: ['Ing. Tomáš Mutina'],
+      students: ['Žáci vyššího gymnázia'],
+    },
+    summary:
+      'Workshop představil vibecoding jako praktický způsob tvorby aplikací s pomocí AI. Žáci si vyzkoušeli, jak formulovat zadání, generovat prototyp, ladit chyby a vybírat správné nástroje pro vývoj i dokumentaci. Proběhla i diskuse, co je vibecoding, kdy se hodí používat GitHub Copilot, ChatGPT, Claude nebo VS Code a jak výstupy AI bezpečně ověřovat.',
+    photos: [
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-01.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-02.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-03.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-04.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-05.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-06.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-07.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-08.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-09.jpg'),
+      assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-10.jpg'),
+    ],
+  },
+  {
     id: 'event-zazitkove-odpoledne-robotika',
     title: 'Zážitkové odpoledne s programováním a robotikou',
     date: '2026-06-17',
@@ -323,22 +350,23 @@ export function EventPlannerPage() {
           </div>
           <p className="mt-2 text-sm leading-relaxed text-slate-700 md:text-base">{selectedEvent.summary}</p>
 
-          <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-3 grid gap-4 lg:grid-cols-[0.9fr_0.9fr_1.2fr]">
             <article className="rounded-xl border border-slate-200 bg-white p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Kde byla akce</p>
-              <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-slate-800">
-                <MapPin className="h-4 w-4 text-indigo-600" />
-                {selectedEvent.location}
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Název události</p>
+              <p className="mt-2 text-sm font-semibold text-slate-800">{selectedEvent.title}</p>
             </article>
 
             <article className="rounded-xl border border-slate-200 bg-white p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Datum akce</p>
               <p className="mt-2 text-sm font-semibold text-slate-800">{formatEventDate(selectedEvent.date)}</p>
               <p className="mt-1 text-xs text-slate-600">{selectedEvent.timeRange}</p>
+              <p className="mt-2 flex items-center gap-2 text-xs font-medium text-slate-600">
+                <MapPin className="h-3.5 w-3.5 text-indigo-600" />
+                {selectedEvent.location}
+              </p>
             </article>
 
-            <article className="rounded-xl border border-slate-200 bg-white p-3 md:col-span-2">
+            <article className="rounded-xl border border-slate-200 bg-white p-3">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Kdo se účastnil</p>
               {selectedEvent.participantGroups ? (
                 <div className="mt-2.5 space-y-2.5">
@@ -391,7 +419,7 @@ export function EventPlannerPage() {
             </article>
           </div>
 
-          <div className="mt-5 grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
+          <div className="mt-5 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_10px_24px_rgba(15,23,42,0.08)]">
               <div className="flex items-center justify-between gap-3">
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
@@ -430,7 +458,14 @@ export function EventPlannerPage() {
                         onClick={() => setLightboxIndex(photoStartIndex + index)}
                         className="overflow-hidden rounded-xl border border-slate-200 bg-slate-100 text-left transition hover:shadow-[0_8px_20px_rgba(15,23,42,0.14)]"
                       >
-                        <img src={photo} alt={`${selectedEvent.title} - fotka ${index + 1}`} className="h-36 w-full object-cover" loading="lazy" />
+                        <div className="flex h-48 items-center justify-center bg-[linear-gradient(160deg,#f8fafc_0%,#eef2ff_100%)] px-2 py-2">
+                          <img
+                            src={photo}
+                            alt={`${selectedEvent.title} - fotka ${index + 1}`}
+                            className="max-h-full max-w-full rounded-md object-contain"
+                            loading="lazy"
+                          />
+                        </div>
                       </button>
                     ))}
                   </div>

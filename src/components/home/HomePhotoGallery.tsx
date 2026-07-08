@@ -1,71 +1,45 @@
-import { Images } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Images } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { PhotoLightbox } from '../gallery/PhotoLightbox'
 import { homeGalleryPhotos } from '../../data/homeGallery'
 
-const GALLERY_ITEMS_COUNT = 7
-
-const CZ_MONTHS: Record<string, number> = {
-  ledna: 0,
-  unora: 1,
-  března: 2,
-  brezna: 2,
-  dubna: 3,
-  kvetna: 4,
-  května: 4,
-  cervna: 5,
-  června: 5,
-  cervence: 6,
-  července: 6,
-  srpna: 7,
-  zari: 8,
-  září: 8,
-  rijna: 9,
-  října: 9,
-  listopadu: 10,
-  prosince: 11,
-}
-
-function parseCzDate(date: string) {
-  const normalized = date.toLowerCase().replace('.', '').trim()
-  const parts = normalized.split(/\s+/)
-  if (parts.length < 3) return new Date(0)
-  const day = Number(parts[0])
-  const month = CZ_MONTHS[parts[1]]
-  const year = Number(parts[2])
-  if (Number.isNaN(day) || Number.isNaN(year) || month === undefined) return new Date(0)
-  return new Date(year, month, day)
-}
+const MIXED_PHOTO_COUNT = 12
+const RIGHT_COLUMN_PAGE_SIZE = 6
 
 export function HomePhotoGallery() {
   const [lightboxState, setLightboxState] = useState<{ photos: typeof homeGalleryPhotos; index: number } | null>(null)
+  const [rightColumnPage, setRightColumnPage] = useState(0)
 
-  const latestThreeEventTags = useMemo(() => {
-    const latestByTag = new Map<string, Date>()
+  const eventTagsInSourceOrder = useMemo(
+    () => Array.from(new Set(homeGalleryPhotos.map((photo) => photo.eventTag))),
+    [],
+  )
 
-    homeGalleryPhotos.forEach((item) => {
-      const parsedDate = parseCzDate(item.date)
-      const current = latestByTag.get(item.eventTag)
-      if (!current || parsedDate > current) {
-        latestByTag.set(item.eventTag, parsedDate)
-      }
-    })
+  const latestEventTag = eventTagsInSourceOrder[eventTagsInSourceOrder.length - 1] ?? null
 
-    return Array.from(latestByTag.entries())
-      .sort((left, right) => right[1].getTime() - left[1].getTime())
-      .slice(0, 3)
-      .map((item) => item[0])
-  }, [])
+  const latestEventPhotos = useMemo(() => {
+    if (!latestEventTag) return [] as typeof homeGalleryPhotos
+    return homeGalleryPhotos.filter((photo) => photo.eventTag === latestEventTag)
+  }, [latestEventTag])
 
-  const latestPhotos = useMemo(() => {
-    return homeGalleryPhotos
-      .filter((item) => latestThreeEventTags.includes(item.eventTag))
-      .sort((left, right) => parseCzDate(right.date).getTime() - parseCzDate(left.date).getTime())
-      .slice(0, GALLERY_ITEMS_COUNT)
-  }, [latestThreeEventTags])
+  const featuredPhoto = latestEventPhotos[0] ?? null
 
-  const featuredPhoto = latestPhotos[0] ?? null
-  const rightColumnPhotos = latestPhotos.slice(1)
+  const rightColumnPhotos = useMemo(() => {
+    const latestWithoutFeatured = featuredPhoto
+      ? latestEventPhotos.filter((photo) => photo.id !== featuredPhoto.id)
+      : latestEventPhotos
+
+    return latestWithoutFeatured.slice(0, MIXED_PHOTO_COUNT)
+  }, [featuredPhoto, latestEventPhotos])
+
+  const rightColumnPages = Math.max(1, Math.ceil(rightColumnPhotos.length / RIGHT_COLUMN_PAGE_SIZE))
+  const currentRightPage = Math.min(rightColumnPage, rightColumnPages - 1)
+  const visibleRightColumnPhotos = rightColumnPhotos.slice(
+    currentRightPage * RIGHT_COLUMN_PAGE_SIZE,
+    (currentRightPage + 1) * RIGHT_COLUMN_PAGE_SIZE,
+  )
+  const rightTopRowPhotos = visibleRightColumnPhotos.slice(0, 3)
+  const rightBottomRowPhotos = visibleRightColumnPhotos.slice(3, 6)
 
   const openLightboxForPhoto = (photoId: string) => {
     const clickedPhoto = homeGalleryPhotos.find((photo) => photo.id === photoId)
@@ -92,59 +66,104 @@ export function HomePhotoGallery() {
       </div>
 
       {featuredPhoto ? (
-        <div className="grid gap-4 xl:grid-cols-[1fr_1.6fr]">
-          <button
-            type="button"
-            onClick={() => openLightboxForPhoto(featuredPhoto.id)}
-            className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white text-left shadow-[0_10px_28px_rgba(15,23,42,0.12)] xl:h-full"
-          >
-            <img
-              src={featuredPhoto.image}
-              alt={featuredPhoto.title}
-              className="h-[260px] w-full object-cover transition duration-500 group-hover:scale-[1.03] md:h-[315px] xl:h-full"
-              loading="lazy"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-900/40 to-transparent p-4 md:p-5">
-              <h3 className="text-lg font-bold text-white md:text-xl">{featuredPhoto.title}</h3>
-              <p className="mt-1 max-w-2xl text-sm text-slate-200">{featuredPhoto.description}</p>
-              <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-100/90">
-                {featuredPhoto.date} • {featuredPhoto.location}
-              </p>
-              <span className="absolute bottom-3 right-3 rounded-full border border-white/35 bg-slate-950/55 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
-                {featuredPhoto.eventTag}
-              </span>
-            </div>
-          </button>
+        <div className="grid gap-4 lg:grid-cols-[1fr_1.6fr]">
+          <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] lg:h-full">
+            <button
+              type="button"
+              onClick={() => openLightboxForPhoto(featuredPhoto.id)}
+              className="group relative block h-full w-full text-left"
+              aria-label={`Otevřít fotku: ${featuredPhoto.title}`}
+            >
+              <img
+                src={featuredPhoto.image}
+                alt={featuredPhoto.title}
+                className="h-[240px] w-full bg-slate-100 object-contain p-1 transition duration-500 group-hover:scale-[1.02] md:h-[290px] lg:h-full"
+                loading="lazy"
+              />
+
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-900/45 to-transparent p-4 md:p-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-200/95">
+                  {featuredPhoto.date} • {featuredPhoto.location}
+                </p>
+                <h3 className="mt-1 text-lg font-bold text-white md:text-xl">{featuredPhoto.eventTag}</h3>
+              </div>
+            </button>
+          </div>
 
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_10px_28px_rgba(15,23,42,0.08)] md:p-4">
             <div className="grid grid-cols-3 gap-2 md:gap-3">
-              {rightColumnPhotos.map((item) => (
+              {rightTopRowPhotos.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => openLightboxForPhoto(item.id)}
-                  className="group relative overflow-hidden rounded-xl border border-slate-200"
+                  className="group relative overflow-hidden rounded-xl border border-slate-200 bg-slate-100"
+                  aria-label={`Otevřít fotku: ${item.title}`}
                 >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-[120px] w-full object-cover transition duration-300 group-hover:scale-[1.03] md:h-[140px]"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-2 py-2">
-                    <p className="line-clamp-2 text-[10px] font-semibold text-white">{item.title}</p>
-                    <span className="absolute bottom-1.5 right-1.5 rounded-full border border-white/35 bg-slate-950/55 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-white backdrop-blur-sm">
-                      {item.eventTag}
-                    </span>
+                  <div className="flex h-[120px] items-center justify-center bg-[linear-gradient(160deg,#f8fafc_0%,#eef2ff_100%)] px-1.5 py-1.5 md:h-[140px]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="max-h-full max-w-full rounded-sm object-contain transition duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
                   </div>
                 </button>
               ))}
             </div>
+
+            {rightColumnPages > 1 ? (
+              <div className="my-2 flex items-center justify-center gap-8">
+                <button
+                  type="button"
+                  onClick={() => setRightColumnPage((previous) => (previous - 1 + rightColumnPages) % rightColumnPages)}
+                  className="inline-flex h-7 w-7 items-center justify-center text-slate-500 transition hover:text-indigo-700"
+                  aria-label="Předchozí sada fotek"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setRightColumnPage((previous) => (previous + 1) % rightColumnPages)}
+                  className="inline-flex h-7 w-7 items-center justify-center text-slate-500 transition hover:text-indigo-700"
+                  aria-label="Další sada fotek"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+            ) : null}
+
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
+              {rightBottomRowPhotos.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => openLightboxForPhoto(item.id)}
+                  className="group relative overflow-hidden rounded-xl border border-slate-200 bg-slate-100"
+                  aria-label={`Otevřít fotku: ${item.title}`}
+                >
+                  <div className="flex h-[120px] items-center justify-center bg-[linear-gradient(160deg,#f8fafc_0%,#eef2ff_100%)] px-1.5 py-1.5 md:h-[140px]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="max-h-full max-w-full rounded-sm object-contain transition duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {!rightColumnPhotos.length ? (
+              <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-center text-xs text-slate-500">
+                Pro poslední dvě akce zatím nejsou dostupné další fotografie.
+              </div>
+            ) : null}
           </div>
         </div>
       ) : null}
 
-      {!latestPhotos.length ? (
+      {!latestEventPhotos.length ? (
         <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-500">
           Z posledních akcí zatím nejsou dostupné žádné fotografie.
         </div>

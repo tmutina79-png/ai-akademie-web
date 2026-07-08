@@ -37,7 +37,7 @@ export function AINewsFeed() {
         </span>
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
+      <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
         <Link
           to={getNewsTarget(featuredItem)}
           className="group relative block overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_18px_42px_rgba(15,23,42,0.1)] transition hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(15,23,42,0.14)]"

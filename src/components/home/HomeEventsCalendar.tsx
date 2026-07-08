@@ -202,7 +202,7 @@ export function HomeEventsCalendar() {
         </div>
       </div>
 
-      <div className="grid items-stretch gap-5 xl:grid-cols-[0.95fr_1fr_300px]">
+      <div className="grid items-stretch gap-5 lg:grid-cols-[0.95fr_1fr_300px]">
         <section className="self-start overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_16px_32px_rgba(15,23,42,0.08)]">
           <div className="border-b border-slate-200 bg-[linear-gradient(135deg,#f8fbff_0%,#eef2ff_52%,#ffffff_100%)] px-4 py-3.5">
             <div className="flex items-center justify-between gap-2">

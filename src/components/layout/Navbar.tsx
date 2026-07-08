@@ -9,7 +9,6 @@ const links = [
   { to: '/projekty', label: 'Projekty' },
   { to: '/planovac-akci', label: 'Událost a akce' },
   { to: '/akademie-ucitele', label: 'Naše tvorba & Materiály' },
-  { to: '/fotogalerie', label: 'Fotogalerie' },
   { to: '/dotacni-projekty', label: 'Dotační projekty' },
 ]
 

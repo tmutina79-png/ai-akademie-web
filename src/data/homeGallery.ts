@@ -12,6 +12,106 @@ export type HomeGalleryItem = {
 
 export const homeGalleryPhotos: HomeGalleryItem[] = [
   {
+    id: 'gallery-vibecoding-2026-01',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Úvodní část workshopu: co je vibecoding, jak pracovat s AI asistentem a jak navrhnout první prototyp aplikace.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-01.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-02',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Žáci testovali, jak formulace promptu ovlivní kvalitu vygenerovaného kódu a návrhu aplikace.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-02.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-03',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Praktická ukázka přechodu od nápadu k funkčnímu prototypu v prostředí Visual Studio Code.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-03.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-04',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Diskuse nad tím, které AI nástroje jsou vhodné pro školní projekty a týmovou spolupráci.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-04.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-05',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Skupinová práce na mini zadáních: návrh funkce, generování kódu, test a rychlá iterace.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-05.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-06',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Ukázka ladění chyb a ověřování výstupů AI tak, aby byl výsledný kód spolehlivý a čitelný.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-06.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-07',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Přednáška Ing. Tomáše Mutiny o bezpečné práci s AI a správné validaci zdrojů a dat.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-07.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-08',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Prezentace žákovských prototypů a porovnání různých přístupů k návrhu stejného řešení.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-08.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-09',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Závěrečné tipy: jaké nástroje kombinovat při tvorbě webu, dokumentace a testování.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-09.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
+    id: 'gallery-vibecoding-2026-10',
+    title: 'Vibecoding pro vyšší gymnázium',
+    description:
+      'Fotodokumentace akce: praktické využití AI nástrojů ve školním prostředí vyššího gymnázia.',
+    date: '24. března 2026',
+    location: 'Matiční gymnázium Ostrava',
+    image: assetPath('events/vibecoding-2026-03-24/vibecoding-2026-03-24-10.jpg'),
+    eventTag: 'Vibecoding pro vyšší gymnázium',
+  },
+  {
     id: 'gallery-zsbohuminska-0',
     title: 'Zážitkové odpoledne s programováním a robotikou',
     description:
